@@ -1,0 +1,60 @@
+body {
+	background-color: #141415;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+
+.checkout-container {
+	
+	width: auto;
+	margin: 2em;
+	height: auto;
+	background-color: aliceblue;
+}
+
+.top-container {
+	padding: 3em;
+}
+
+.item {
+	top: 0;
+	width: 20%;
+	font-size: 1.3em;
+	color: #48485e;
+	text-align: center;
+	padding: 1em;
+}
+
+.payment-column {
+	display: table;
+	width: auto;
+}
+
+.payment-column .item {
+	display: table-cell;
+}
+
+
+.price {
+	top: 0;
+	list-style-type: none;
+	border: 1px solid #eee;
+	-webkit-transition: 0.3s;
+	transition: 0.3s;
+}
+
+.price li {
+	
+	border-bottom: 1px solid #eee;
+	padding: 15px;
+	text-align: center;
+}
+
+.price:hover {
+  box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
+}
+
+#paypal-button-container {
+	padding: 20px;
+}
