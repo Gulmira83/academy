@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content  %}
+<!-- <link rel="stylesheet" href="/static/login.css" type="text/css"> -->
+<!-- <link rel="stylesheet" href="/static/signup/signup.css" type="text/css"> -->
+
+<script src="https://www.paypal.com/sdk/js?client-id=sb&disable-funding=credit"></script>
+
+<link rel="stylesheet" href="/static/accounting/accounting.css" type="text/css">
+
+
+<div class="checkout-container">
+	<div class="top-container">
+		<h2>Please read cerafully before you submit the payment</h2>
+		<p>If you have any question or if you have any concerns please visit <a href="/coming-soon">contact</a>  page</p>
+	</div>
+	<div class="payment-column">
+		<div class="item">
+			<ul class="price">
+				<li>$ 24.99 / year</li>
+				<li>Acccess to Academy</li>
+				<li>Access to FuchiCorp Meetings</li>
+				<li>5 Pynote</li>
+				<li>Unlimuted Service</li>
+				<li>5 Pynote</li>
+				<li>Unlimuted Service</li>
+				<li>5 Pynote</li>
+				<li>Unlimuted Service</li>
+				
+			</ul>
+		</div>
+	
+		<div class="item">
+			<div  class="price">
+				<div class="payment-message">
+					<h2>Please choose your payment method</h2>
+				</div>
+				<div id="paypal-button-container" class=""></div>
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+
+
+<script>
+	// Render the PayPal button into #paypal-button-container
+	paypal.Buttons({
+
+		// Set up the transaction
+		createOrder: function(data, actions) {
+			return actions.order.create({
+				purchase_units: [{
+					amount: {
+						value: '0.01'
+					}
+				}]
+			});
+		},
+
+		// Finalize the transaction
+		onApprove: function(data, actions) {
+			return actions.order.capture().then(function(details) {
+				// Show a success message to the buyer
+				alert('Transaction completed by ' + details.payer.name.given_name + '!');
+			});
+		}
+
+
+	}).render('#paypal-button-container');
+</script>
+
+{% endblock content  %}
