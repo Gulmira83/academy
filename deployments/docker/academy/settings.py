@@ -23,7 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^oasvepw0s)@e!950p%$byfn$&dayut062i)i-a+_nm6-19#zz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+if os.environ.get('ENVIRONMENT'):
+    environment = os.environ.get('ENVIRONMENT').lower()
+    if 'dev' in environment:
+        DEBUG = True
 
 ALLOWED_HOSTS = [
     'academy.fuchicorp.com',
@@ -81,9 +85,7 @@ TEMPLATES = [
 AUTHENTICATION_BACKENDS = (
     # 'social_core.backends.github.GithubOAuth2',
     'social_core.backends.github.GithubOrganizationOAuth2',
-    # 'social_core.backends.twitter.TwitterOAuth',
-    # 'social_core.backends.facebook.FacebookOAuth2',
-    # 'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 
@@ -149,7 +151,6 @@ STATIC_URL = '/static/'
 
 LOGIN_URL = '/login'
 LOGOUT_URL = '/logout'
-LOGOUT_REDIRECT_URL = '/logout'
 LOGIN_REDIRECT_URL = '/home'
 
 SOCIAL_AUTH_GITHUB_KEY = os.environ.get('SOCIAL_AUTH_GITHUB_KEY') 

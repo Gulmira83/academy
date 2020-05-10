@@ -7,6 +7,10 @@ COPY ./academy /website
 ## Changing the workspace
 WORKDIR /website
 
+## Putting inside Docker file which environment is 
+ARG branch_name
+ENV ENVIRONMENT=$branch_name
+
 ## Installing all libraries 
 RUN pip install -r requirements.txt
 
