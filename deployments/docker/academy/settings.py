@@ -23,12 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^oasvepw0s)@e!950p%$byfn$&dayut062i)i-a+_nm6-19#zz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False
 if os.environ.get('ENVIRONMENT'):
     environment = os.environ.get('ENVIRONMENT').lower()
     if 'dev' in environment:
         DEBUG = True
-else:    
-    DEBUG = False
 
 ALLOWED_HOSTS = [
     'academy.fuchicorp.com',
