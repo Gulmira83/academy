@@ -6,13 +6,15 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
 from .forms import UpdateInfo
 
+from accounting.models import Plans
 
 # Create your views here.
 
 def index(request):
     login_form = AuthenticationForm()
-    return render(request, 'main.html', {'login_form': login_form})
+    plans = Plans.objects.all()
 
+    return render(request, 'main.html', {'login_form': login_form, 'plans':plans})
 
 @login_required
 def home(request):

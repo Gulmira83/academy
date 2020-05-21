@@ -22,51 +22,28 @@
 
 
         <!-- Plan subscription  -->
-        <div  class="pricing-container">
+       <div  class="pricing-container">
+        {% for plan in plans%}
           <div class="columns">
             <ul class="price">
-              <li class="header-basic">Basic</li>
-              <li class="grey">Free / Free</li>
-              <li>Access to Academy</li>
-              <li>Free Meetings</li>
-              <li>1 Pynote </li>
-              <li>5 hourse services</li>
+                <li class="header-basic" style="background-color:#4CAF50">{{plan.name}}</li>
+              <li class="grey">{{plan.price}}</li>
+              <li>{{plan.description}}</li>
+              <li>{{plan.option1}}</li>
+              <li>{{plan.option2}}</li>
+              <li>{{plan.option3}}</li>
               <li class="grey"><a href="/signup" class="button">Sign Up</a></li>
             </ul>
           </div>
-
-          <div class="columns">
-            <ul class="price">
-              <li class="header" style="background-color:#4CAF50">Pro</li>
-              <li class="grey">$ 24.99 / year</li>
-              <li>Acccess to Academy</li>
-              <li>Access to FuchiCorp Meetings</li>
-              <li>5 Pynote</li>
-              <li>Unlimuted Service</li>
-              <li class="grey"><a href="/signup" class="button">Sign Up</a></li>
-            </ul>
-          </div>
-
-          <div class="columns">
-            <ul class="price">
-              <li class="header">Premium</li>
-              <li class="grey">$ 49.99 / year</li>
-              <li>Access to Academy</li>
-              <li>Access to all Videos</li>
-              <li>Unlimited Pynote</li>
-              <li>Custom domain name</li>
-              <li class="grey"><a href="/signup" class="button">Sign Up</a></li>
-            </ul>
-          </div>
-        </div>
+        {% endfor %}
         <!-- Plan subscription  -->
 
 
         <!-- Companies logoes -->
-        <div  class="sections-wrp">
-          <div class="hc-title section-title-medium">Our graduates have been hired by top tech companies</div>
+        <div  class="sections-wrp ">
+          <div class="hc-title section-title-medium mb-5 pb-5">Our graduates have been hired by top tech companies</div>
           <div class="hc-logo-container">
-              <div  class="hc-logo">
+              <div  class="hc-logo ">
                     <picture>
                        <img src="/static/images/sp-sec-company-logo-sprite.webp" alt="company-logos" class="">
                     </picture>
@@ -74,14 +51,9 @@
           </div>
         </div>
         <!-- end companies -->
-
-
       </div>
 
       
-
-
-
   </div>
   {% include "footer.html" %}
 </body>
