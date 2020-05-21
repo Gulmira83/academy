@@ -12,10 +12,10 @@ services:
     links:
       - "mysql:database"
     environment:
-      SOCIAL_AUTH_GITHUB_KEY: 12a5ef9d9cd3a7ab1d67
-      SOCIAL_AUTH_GITHUB_SECRET: 3a02672b7cdc6bb56d3e335f6a5a48de96a85b25
-      ADMIN_USER: firasjb
-      ADMIN_PASSWORD: firasjb*
+      SOCIAL_AUTH_GITHUB_KEY: ""
+      SOCIAL_AUTH_GITHUB_SECRET: ""
+      ADMIN_USER: ""
+      ADMIN_PASSWORD: ""
       MYSQL_ROOT_PASSWORD: LocalPass
       MYSQL_DATABASE: academy
       MYSQL_USER: academy
