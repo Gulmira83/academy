@@ -8,14 +8,14 @@ services:
     volumes:
       - ./academy:/website
     ports:
-      - "5000:5000"
+    - "5000:5000"
     links:
       - "mysql:database"
     environment:
-      SOCIAL_AUTH_GITHUB_KEY: ""
-      SOCIAL_AUTH_GITHUB_SECRET: ""
-      ADMIN_USER: ""
-      ADMIN_PASSWORD: ""
+      SOCIAL_AUTH_GITHUB_KEY: 
+      SOCIAL_AUTH_GITHUB_SECRET: 
+      ADMIN_USER: firasjb
+      ADMIN_PASSWORD: firasjb*
       MYSQL_ROOT_PASSWORD: LocalPass
       MYSQL_DATABASE: academy
       MYSQL_USER: academy
