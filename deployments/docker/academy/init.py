@@ -34,16 +34,17 @@ def init_script():
         ]
 
     for plan in plans:
-        if not Plans.objects.filter(name=plan['name']).exists():
-            plan_class = Plans(
-                name=plan['name'], 
-                price=plan['price'],
-                description=plan['description'],
-                option1=plan['option1'],
-                option2=plan['option2'],
-                option3=plan['option3'],
-                )
-            plan_class.save()
+        if db_table_exists('accounting_plans'):
+            if not Plans.objects.filter(name=plan['name']).exists():
+                plan_class = Plans(
+                    name=plan['name'], 
+                    price=plan['price'],
+                    description=plan['description'],
+                    option1=plan['option1'],
+                    option2=plan['option2'],
+                    option3=plan['option3'],
+                    )
+                plan_class.save()
     
     ## Init script which is responsible to create admin user
     if os.environ.get('ADMIN_USER') and os.environ.get('ADMIN_PASSWORD'):
