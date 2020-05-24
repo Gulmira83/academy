@@ -29,12 +29,12 @@
     <a href="">Services</a>
     <a href="/home">Home</a>
 
-    {% if not user.is_authenticated %}
-        
+    {% if not user.is_authenticated %}        
         <a href="{% url 'social:begin' 'github' %}">GitHub Login</a>
-        <!-- <a href="{% url 'social:begin' 'github-org' %}">GitHub Login</a> -->
-        <a class="green" id="signup-btn" href="/signup">SignUp today</a>
+    {% else %}
+        <a>Welcome : {{user.first_name}}</a>
     {% endif %}
+    
 </div>
 
 {% if not user.is_authenticated and login_form %}

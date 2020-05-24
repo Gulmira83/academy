@@ -2,13 +2,12 @@ from django.shortcuts import render, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import  AuthenticationForm
 from django.shortcuts import render, redirect
-from .forms import UpdateInfo
-
+from .forms import UpdateInfo,RegistrationForm
 from accounting.models import Plans
+from .models import Emailer
 
-# Create your views here.
 
 def index(request):
     login_form = AuthenticationForm()
@@ -70,16 +69,41 @@ def settings(request):
 def disabled(request):
     return render(request, 'disabled.html', {})
 
-def signup(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home')
-    else:
-        form = UserCreationForm()
+
+#signtup page tacking id of the selected item as an argument
+def signup(request, id):
+    if Plans.objects.filter(id=id).exists():  
+        if request.method == 'POST':
+            form = RegistrationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                
+                user = authenticate(username=request.POST['username'], password=request.POST['password1'])
+                login(request, user)
+
+            
+                plan = Plans.objects.filter(id=id).first()
+                if plan.price == 'Free':
+                    return redirect('/profile')
+
+                return redirect(f'/accounting/paypal/{id}')
+
+        else:
+            form = RegistrationForm()
     return render(request, 'signup.html', {'form': form})
+
+
+#subscription to the newsletter using the emailer model
+def newsletter(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        emailer = Emailer()
+        emailer.send_email(email)
+        welcome = "Welcome to our newsletter"
+        return render(request, 'newsletter/newsletter.html',{'welcome':welcome})
+             
+    return render(request,'newsletter/newsletter.html')
+
+
+
+
