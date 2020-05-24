@@ -22,6 +22,15 @@ variable "admin_password" {
   default = "vKnqbgSh0qS7dpZy%S6"
 }
 
+variable "whitelisted_cidrs" {
+  type = "map"
+  default = {
+    prod = "0.0.0.0/0"
+    qa   = "10.16.0.27/8, 50.194.68.229/32, 50.194.68.230/32, 24.12.115.204/32"
+    dev  = "10.16.0.27/8, 50.194.68.229/32, 50.194.68.230/32, 24.12.115.204/32"
+  }
+}
+
 variable "deployment_environment" {
   default = "dev"
 }
