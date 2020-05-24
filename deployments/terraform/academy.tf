@@ -10,5 +10,6 @@ module "academy-deploy" {
     deployment_image     = "${var.deployment_image}"    
     service_account      = "${var.academy_service_account}"    
     academy_credentials  = "${kubernetes_secret.academy_credentials.metadata.0.name}"
+    whitelisted_cidrs    = "${lookup(var.whitelisted_cidrs, "${var.deployment_environment}")}" 
   }
 }
