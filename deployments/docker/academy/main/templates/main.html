@@ -26,13 +26,13 @@
         {% for plan in plans%}
           <div class="columns">
             <ul class="price">
-                <li class="header-basic" style="background-color:#4CAF50">{{plan.name}}</li>
-              <li class="grey">{{plan.price}}</li>
+              <li class="header-basic">{{plan.name}}</li>
+              <li >{{plan.price}}</li>
               <li>{{plan.description}}</li>
               <li>{{plan.option1}}</li>
               <li>{{plan.option2}}</li>
               <li>{{plan.option3}}</li>
-              <li class="grey"><a href="/signup" class="button">Sign Up</a></li>
+              <li class="grey"><a href="/signup/{{plan.id}}" class="button">Sign Up</a></li>
             </ul>
           </div>
         {% endfor %}
@@ -41,7 +41,7 @@
 
         <!-- Companies logoes -->
         <div  class="sections-wrp ">
-          <div class="hc-title section-title-medium mb-5 pb-5">Our graduates have been hired by top tech companies</div>
+          <div class="hc-title section-title-medium">Our graduates have been hired by top tech companies</div>
           <div class="hc-logo-container">
               <div  class="hc-logo ">
                     <picture>
