@@ -21,7 +21,6 @@ def home(request):
     login_form = AuthenticationForm()
 
     user = User.objects.get(username=request.user.username)
-    feature = Feature.objects.get(user=request.user.id)
 
     if not feature.id:
         feature = Feature.objects.create(feature_type= "Basic", user=user)
