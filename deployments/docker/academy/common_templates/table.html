@@ -19,11 +19,17 @@
       }
       
       </style>
-      
+      {% if access == "True" %}
      {% for video in table_data %}
       <div class="vertical-menu">
         <a href="{{ video.id }}">{{ video.name }}</a>
       </div>
      {% endfor %}
+     {% elif access == "False" %}
+      <center>
+      <h3>you have a basic subscription</h3>
+      <h1> you are not able to watch the videos till you upgrade your subscription to Pro or Premuim</h1>
+      </center>
+      {% endif %}
   </div>
 </div>
