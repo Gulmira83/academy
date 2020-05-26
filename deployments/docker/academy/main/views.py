@@ -21,6 +21,8 @@ def home(request):
     login_form = AuthenticationForm()
 
     user = User.objects.get(username=request.user.username)
+    feature = Feature.objects.create(feature_type= "Basic", user=user)
+
     if not user.first_name or not user.last_name:
         return redirect('update_info')
     users = User.objects.all()
@@ -106,6 +108,8 @@ def newsletter(request):
         return render(request, 'newsletter/newsletter.html',{'welcome':welcome})
              
     return render(request,'newsletter/newsletter.html')
+
+
 
 
 
