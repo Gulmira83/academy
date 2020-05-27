@@ -10,7 +10,7 @@ from django.dispatch import receiver
 
 class Feature(models.Model):
     
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     feature_type= models.CharField(max_length=60,default="Basic")
     payment_confirmation = models.BooleanField(default=False)
     created_at = models.DateTimeField(verbose_name='date joined',auto_now_add=True)
