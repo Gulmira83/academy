@@ -12,20 +12,20 @@ def init_script():
         'option1': 'Free Meetings',
         'option2': '1 Pynote',
         'option3': '5 hourse services',
-
         },
+
         {
         'name' : 'Pro',
-        'price' : '$ 24.99 / year',
+        'price' : '24.99',
         'description': 'Acccess to Academy',
         'option1': 'Access to FuchiCorp Meetings',
         'option2': '5 Pynote',
         'option3': 'Unlimuted Service',
-
         },
+
         {
         'name' : 'Premium',
-        'price' : '$ 49.99 / year',
+        'price' : '49.99',
         'description': 'Access to Academy',
         'option1': 'Access to all Videos',
         'option2': 'Unlimited Pynote',
@@ -45,7 +45,7 @@ def init_script():
                     option3=plan['option3'],
                     )
                 plan_class.save()
-    
+
     ## Init script which is responsible to create admin user
     if os.environ.get('ADMIN_USER') and os.environ.get('ADMIN_PASSWORD'):
 

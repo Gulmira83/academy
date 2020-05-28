@@ -7,12 +7,7 @@ from videos.models import Video, VideoTopic
 from main.models import Feature
 from django.contrib.auth.models import User
 
-# def index(request):
-#     v = Vimeo()
-#     folder = v.get_folder_videos('fuchicorp')
-#     return HttpResponse(json.dumps(folder), content_type="application/json")
-
-# @login_required
+@login_required
 def index(request):
 
     user = User.objects.get(username=request.user.username)
@@ -30,7 +25,7 @@ def index(request):
     
 
 
-# @login_required
+@login_required
 def topics(request, topic=None):
 
     user = User.objects.get(username=request.user.username)

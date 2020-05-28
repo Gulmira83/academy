@@ -1,0 +1,33 @@
+.right-container {
+    align-items: center;
+    text-align: center;
+}
+
+h1 {
+    padding: 0.2em;
+}
+
+.containeer {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    margin: 1em;
+    background-color: white;
+}
+
+.item {
+    height: 13em;
+    width: 12em;
+    background-color: rgb(180, 180, 180);
+    margin: 0.3em;
+    border-radius: 0.20em;
+}
+
+.item:hover {
+    background-color: #d8d8d8;
+}
+
+.emtyspace {
+    height: 40em;
+    width: 100%;
+}

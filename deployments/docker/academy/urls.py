@@ -19,13 +19,14 @@ from django.urls import path, include
 from init import init_script
 
 urlpatterns = [
-    path('admin', admin.site.urls),
     path('', include('main.urls')),
+    path('admin', admin.site.urls),
     path('info', include('info.urls')),
-    path('videos/', include('videos.urls')),
-    path('accounting/', include('accounting.urls')),
     path('login', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout', LogoutView.as_view(template_name='logout.html'), name='logout'),
+    path('accounting/', include('accounting.urls')),
+    path('services/', include('services.urls')),
+    path('videos/', include('videos.urls')),
     path('oauth/', include('social_django.urls', namespace='social')),
 ]
 
