@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     path('paypal/<int:id>', views.index, name='index'), 
+    path('complete/', views.paymentComplete, name='complete'),
 ]

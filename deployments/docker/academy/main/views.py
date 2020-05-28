@@ -6,7 +6,7 @@ from django.contrib.auth.forms import  AuthenticationForm
 from django.shortcuts import render, redirect
 from .forms import UpdateInfo,RegistrationForm
 from accounting.models import Plans
-from .models import Emailer
+from .models import Emailer, Feature
 
 
 def index(request):
@@ -21,6 +21,11 @@ def home(request):
     login_form = AuthenticationForm()
 
     user = User.objects.get(username=request.user.username)
+    feature = Feature.objects.filter(user=request.user)
+
+    if not feature.exists():
+        feature = Feature.objects.create(feature_type= "Basic", user=user)
+
     if not user.first_name or not user.last_name:
         return redirect('update_info')
     users = User.objects.all()
@@ -77,12 +82,15 @@ def signup(request, id):
             form = RegistrationForm(request.POST)
             if form.is_valid():
                 form.save()
-                
+
                 user = authenticate(username=request.POST['username'], password=request.POST['password1'])
                 login(request, user)
 
-            
                 plan = Plans.objects.filter(id=id).first()
+                related_user = User.objects.get(username=request.user.username)
+        
+                feature = Feature.objects.create(feature_type= "Basic", user=related_user)
+
                 if plan.price == 'Free':
                     return redirect('/profile')
 
@@ -103,6 +111,8 @@ def newsletter(request):
         return render(request, 'newsletter/newsletter.html',{'welcome':welcome})
              
     return render(request,'newsletter/newsletter.html')
+
+
 
 
 

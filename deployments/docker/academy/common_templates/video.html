@@ -2,20 +2,27 @@
 <div class="right-container one-line">
   <div class="container">
 
+  {% if access == "True" %}
     {% for video in videos %}
-    <div class="mySlides">
+        <div class="mySlides">
 
-      <div class='videoName' >
-        <h3 >{{ video.name }}</h3>
-      </div>
-      
-      <iframe src="{{ video.link }}"  class="videoPlayer" frameborder="0" allow="autoplay; fullscreen" allowfullscreen title="{{ video.description }}"></iframe>
-      <div class='videoDescription' >
-        <p>{{ video.description }}</p>
-      </div>
-      
-    </div>
-    {% endfor  %}
+          <div class='videoName' >
+            <h3 >{{ video.name }}</h3>
+          </div>
+          
+          <iframe src="{{ video.link }}"  class="videoPlayer" frameborder="0" allow="autoplay; fullscreen" allowfullscreen title="{{ video.description }}"></iframe>
+          <div class='videoDescription' >
+            <p>{{ video.description }}</p>
+          </div>
+          
+        </div>
+      {% endfor  %}
+    {% elif access == "False" %}
+      <center>
+      <h3>you have a basic subscription</h3>
+      <h1> you are not able to watch the videos till you upgrade your subscription to Pro or Premuim</h1>
+      </center>
+    {% endif %}
     <a class="prev" onclick="plusSlides(-1)">❮</a>
     <a class="next" onclick="plusSlides(1)">❯</a>
   </div>
