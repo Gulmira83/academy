@@ -35,6 +35,7 @@ ALLOWED_HOSTS = [
     'dev.academy.fuchicorp.com',
     '127.0.0.1',
     'localhost',
+    'bastion.fuchicorp.com',
 ]
 
 
