@@ -16,7 +16,7 @@ def init_script():
 
         {
         'name' : 'Pro',
-        'price' : '$ 24.99 / year',
+        'price' : '24.99',
         'description': 'Acccess to Academy',
         'option1': 'Access to FuchiCorp Meetings',
         'option2': '5 Pynote',
@@ -25,7 +25,7 @@ def init_script():
 
         {
         'name' : 'Premium',
-        'price' : '$ 49.99 / year',
+        'price' : '49.99',
         'description': 'Access to Academy',
         'option1': 'Access to all Videos',
         'option2': 'Unlimited Pynote',
