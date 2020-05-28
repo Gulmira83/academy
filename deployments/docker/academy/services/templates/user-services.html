@@ -1,0 +1,34 @@
+
+{% extends "base.html" %}
+{% block content  %}
+<body>
+  <link rel="stylesheet" href="/static/style.css" type="text/css">
+  <!-- Inclouded left bar which is contians dashboard and some profile links -->
+  {% include "leftbar.html" %}
+
+  <div class="right-container one-line">
+    <div class="settings-form">
+      
+      <h1>Services</h1>
+      <div class="containeer">
+        
+        {% for service in services %}
+          <a href="/services/user-services/{{ user.username }}"><div class="item">
+            <p>{{ service.id }}</p>
+            <p>{{ service.name }}</p>
+            <p>{{ service.username }}</p>
+            <p>{{ service.path }}</p>
+            <a href="/services/"></a>
+        </div></a>
+        {% endfor %}
+      </div>
+      
+    </div>
+
+    <div class="emtyspace">
+  </div>
+</div>
+
+{% include "footer.html" %}
+</html>
+{% endblock %}

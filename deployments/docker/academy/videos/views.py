@@ -5,19 +5,14 @@ import json
 from django.http import HttpResponse
 from videos.models import Video, VideoTopic
 
-# def index(request):
-#     v = Vimeo()
-#     folder = v.get_folder_videos('fuchicorp')
-#     return HttpResponse(json.dumps(folder), content_type="application/json")
-
-# @login_required
+@login_required
 def index(request):
     
     result = Video.objects.all()
     return render(request, 'videos.html', {'videos': result})
 
 
-# @login_required
+@login_required
 def topics(request, topic=None):
     topics = VideoTopic.objects.all()
 

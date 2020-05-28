@@ -1,0 +1,47 @@
+
+{% extends "base.html" %}
+{% block content  %}
+<body>
+  <link rel="stylesheet" href="/static/style.css" type="text/css">
+  <!-- Inclouded left bar which is contians dashboard and some profile links -->
+  {% include "leftbar.html" %}
+
+  <div class="right-container one-line">
+    <div class="settings-form">
+      
+      <h1>Services</h1>
+      <div class="containeer">
+        
+        {% for service in services %}
+          <div class="item">
+            <a href="/services/user-services"><p>{{ service.name }}</p></a>
+                  <form method="POST" action="/services/">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                        {{ field.label }}
+                        {{ field }}
+
+                        {% if field.help_text %}
+                          <small style="color: grey">{{ field.help_text }}</small>
+                        {% endif %}
+
+                        {% for error in field.errors %}
+                          <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                  <input onclick="" type="submit" name="EditProfileSubmit" value="Submit">
+                </form>
+        </div>
+        {% endfor %}
+      </div>
+      
+    </div>
+
+    <div class="emtyspace">
+  </div>
+</div>
+
+{% include "footer.html" %}
+</html>
+{% endblock %}
