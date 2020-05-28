@@ -26,3 +26,5 @@ deployments/selenium/selenium.iml
 example.txt
 *sqlite*
 *migrations*
+deployments/docker/kubeconfig
+deployments/docker/docker-compose.yaml

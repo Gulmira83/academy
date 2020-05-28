@@ -1,6 +1,8 @@
 ## Building the docker container based on python
 FROM python
 
+COPY ./kubeconfig /root/.kube/config
+
 ## Copying all django app to docker container 
 COPY ./academy /website
 
@@ -19,3 +21,4 @@ EXPOSE 5000
 
 ## Making sure that application will run on first start 
 CMD [ "/bin/sh", "-c", "sleep 10 && python manage.py migrate --run-syncdb && python manage.py runserver 0.0.0.0:5000 --insecure"]
+
