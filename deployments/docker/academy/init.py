@@ -2,6 +2,7 @@ import os
 from django.contrib.auth.models import User
 from accounting.models import Plans
 import logging
+import getpass
 
 def init_script():
     plans = [
@@ -60,6 +61,14 @@ def init_script():
                 super_user.save()
                 logging.warning(f"admin user <{os.environ.get('ADMIN_USER')}> has been created !!")
 
+    ## Setting up the kube config file for academy
+    if os.path.isfile('bash/kube-confiig-setup.sh'):
+        if str(getpass.getuser()).lower() == 'root':
+            if not os.path.isdir('/root/.kube'):
+                os.mkdir('/root/.kube')
+            os.system("bash bash/kube-confiig-setup.sh")
+        else:
+            logging.warning("Skiping the kube config set up!!")
 
 def db_table_exists(table_name, cursor=None):
     ## Function to check table exist or not
