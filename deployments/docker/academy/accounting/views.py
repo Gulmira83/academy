@@ -21,6 +21,16 @@ def paymentComplete(request):
     body = json.loads(request.body)
     plan = Plans.objects.get(id=body['productId'])
 
+    # request_price = body['total']
     feature = Feature.objects.filter(user=request.user).update(payment_confirmation='True',feature_type=str(plan))
-
+    
     return JsonResponse('payment completed!', safe=False)
+
+
+
+def declinedPayment(request):
+    return render(request, 'declined-payment.html')
+
+
+def successPayment(request):
+    return render(request, 'success-payment.html')

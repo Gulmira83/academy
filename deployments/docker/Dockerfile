@@ -1,7 +1,7 @@
 ## Building the docker container based on python
 FROM python
 
-COPY ./kubeconfig /root/.kube/config
+#COPY ./kubeconfig /root/.kube/config
 
 ## Copying all django app to docker container 
 COPY ./academy /website

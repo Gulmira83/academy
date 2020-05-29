@@ -21,15 +21,24 @@ def home(request):
     login_form = AuthenticationForm()
 
     user = User.objects.get(username=request.user.username)
+
     feature = Feature.objects.filter(user=request.user)
 
     if not feature.exists():
         feature = Feature.objects.create(feature_type= "Basic", user=user)
 
+    
+    confirmation = Feature.objects.get(user=request.user)
+    need_payment = False
+
+    if confirmation.payment_confirmation == False:
+        need_payment = True
+
+
     if not user.first_name or not user.last_name:
         return redirect('update_info')
     users = User.objects.all()
-    return render(request, 'home.html', {'login_form': login_form, 'users': users})
+    return render(request, 'home.html', {'login_form': login_form, 'users': users, 'need_payment':need_payment})
 
 @login_required
 def update_info(request):
