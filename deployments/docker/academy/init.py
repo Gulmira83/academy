@@ -5,15 +5,6 @@ import logging
 import getpass
 
 def init_script():
-    ## Setting up the kube config file for academy
-    if os.path.isfile('bash/kube-confiig-setup.sh'):
-        if getpass.getuser().lower() == 'root':
-            if not os.path.isdir('/root/.kube'):
-                logging.info('Creating kube folder')
-                os.mkdir('/root/.kube')
-            print(os.system("bash bash/kube-confiig-setup.sh"))
-        else:
-            logging.warning("Skiping the kube config set up!!")
 
     plans = [
         {
