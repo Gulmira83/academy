@@ -7,11 +7,14 @@ from kubernetes.client.rest import ApiException
 import yaml 
 import random
 import logging
+import os 
 
-## Loading the Kubernetes configuration
-# config.load_kube_config()
-# kube = client.ExtensionsV1beta1Api()
-# api = core_v1_api.CoreV1Api()
+def get_kube_config():
+    if os.path.isfile('/var/run/secrets/kubernetes.io/serviceaccount/token'):
+        return config.load_incluster_config()
+    else:
+        return config.load_kube_config()
+    
 
 class UserService(models.Model):
     name          = models.CharField(max_length=200)
@@ -29,7 +32,7 @@ class UserService(models.Model):
 class Pynote:
     ## Model to create PyNote
     name = 'Pynote'
-    config.load_kube_config()
+    get_kube_config()
     kube = client.ExtensionsV1beta1Api()
     api = core_v1_api.CoreV1Api()
 
@@ -102,9 +105,6 @@ class Pynote:
 
     def create_service(self, username, password, service_path=None):
         ## Function to create service pynote 
-        config.load_kube_config()
-        kube           = client.ExtensionsV1beta1Api()
-        api            = core_v1_api.CoreV1Api()
         pynote_name    = username.lower()
         pynote_pass    = password
         ingress_name   = f'{self.environment}-pynote-ingress'
@@ -149,9 +149,6 @@ class Pynote:
 
     def delete_service(self, username):
         ## Function to delete the service
-        config.load_kube_config()
-        kube           = client.ExtensionsV1beta1Api()
-        api            = core_v1_api.CoreV1Api()
         pynote_name    = username.lower()
         ingress_name   = f'{self.environment}-pynote-ingress'
         namespace      = f'{self.environment}-students'
