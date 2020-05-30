@@ -9,9 +9,9 @@ import random
 import logging
 
 ## Loading the Kubernetes configuration
-config.load_kube_config()
-kube = client.ExtensionsV1beta1Api()
-api = core_v1_api.CoreV1Api()
+# config.load_kube_config()
+# kube = client.ExtensionsV1beta1Api()
+# api = core_v1_api.CoreV1Api()
 
 class UserService(models.Model):
     name          = models.CharField(max_length=200)
