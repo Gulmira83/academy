@@ -96,7 +96,7 @@ class Pynote:
         return templates
 
     def existing_ingess(self, ingerssname, namespace):
-        list_ingress = kube.list_namespaced_ingress(namespace).items
+        list_ingress = self.kube.list_namespaced_ingress(namespace).items
         for item in list_ingress:
             if item.metadata.name == ingerssname:
                 return item
