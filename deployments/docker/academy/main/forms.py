@@ -18,19 +18,18 @@ class UpdateInfo(forms.Form):
             raise forms.ValidationError('Please enter required information')
 
 
-
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
     class Meta:
         model = User
         fields = {
+            'email',
+            'username',
             'last_name',            
             'first_name',
-            'username',
-            'email',
+            'password2',
             'password1',
-            'password2'
         }
     
     def save(self, commit=True):
