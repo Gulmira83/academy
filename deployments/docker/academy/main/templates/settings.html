@@ -11,7 +11,10 @@
           <h1>Edit My profile</h1>
           <form  method="POST">
             <input type="hidden" name="settingsForm" value="EditProfileSubmit" >
-            <input onclick="messagePopUp(this)" type="submit" name="EditProfileSubmit" value="Submit">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <center><input  type="submit" name="EditProfileSubmit" value="Submit"></center>
+
           </form>
         </div>
 
@@ -19,20 +22,12 @@
           <h1>Delete My Pynote</h1>
           <form method="POST">
             <input type="hidden" name="settingsForm" value="DeletePyNote" >
-
             <a href="/pynote"><button class="delete" type="button" name="Create PyNote">Create PyNote</button></a>
             <input onclick="messagePopUp(this)" type="submit" value="Delete">
           </form>
-        </div>
+        </div> 
 
-        <div class="settings-form">
-          <h1>Change the Password</h1>
-          <form method="POST">
-            <input type="hidden" name="settingsForm" value="ChangePassword" >
-            <input onclick="messagePopUp(this)" type="submit" value="Submit">
 
-          </form>
-        </div>
 
                   <!-- The Modal -->
           <div id="myModal" class="modal">

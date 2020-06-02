@@ -2,12 +2,15 @@ from django.shortcuts import render, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import  AuthenticationForm
+from django.contrib.auth.forms import  AuthenticationForm, PasswordChangeForm
 from django.shortcuts import render, redirect
-from .forms import UpdateInfo,RegistrationForm
+from .forms import (UpdateInfo,
+                    RegistrationForm,
+                    UpdateSettingsForm,
+                    )
 from accounting.models import Plans
 from .models import Emailer, Feature
-
+from django.contrib.auth import update_session_auth_hash
 
 def index(request):
     login_form = AuthenticationForm()
@@ -39,6 +42,7 @@ def home(request):
         return redirect('update_info')
     users = User.objects.all()
     return render(request, 'home.html', {'login_form': login_form, 'users': users, 'need_payment':need_payment})
+
 
 @login_required
 def update_info(request):
@@ -76,9 +80,40 @@ def debug(request):
 
 @login_required
 def settings(request):
-    login_form = AuthenticationForm()
     user = User.objects.get(username=request.user.username)
-    return render(request, 'settings.html', {'login_form': login_form})
+    if request.method == 'POST':
+        form = UpdateSettingsForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/profile')
+    else:
+        form = UpdateSettingsForm(instance=request.user)
+        args = {'form':form}
+    
+    return render(request, 'settings.html', args)
+
+@login_required
+def change_password(request):
+
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('/profile')
+        else:
+            alert = True
+            return render(request, 'change_password.html', {'alert':alert})
+
+    else:
+        form = PasswordChangeForm(user=request.user)
+        args = {'form':form}
+    
+        return render(request, 'change_password.html', args)
+
+
 
 def disabled(request):
     return render(request, 'disabled.html', {})
