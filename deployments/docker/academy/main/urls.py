@@ -12,6 +12,6 @@ urlpatterns = [
     path('update-info', views.update_info, name='update_info'),  
     path('debug', views.debug, name='debug'),  
     path('coming-soon', views.commin_soon, name='comming-soon'),  
-    path('newsletter', views.newsletter, name='newsletter'),  
-
+    path('newsletter', views.newsletter, name='newsletter'),
+    path('password/', views.change_password, name='edit-password'),
 ]

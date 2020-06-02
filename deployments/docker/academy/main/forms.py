@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django import forms
 
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 class UpdateInfo(forms.Form):
     first_name = forms.CharField(min_length=2, max_length=30)
@@ -16,6 +16,13 @@ class UpdateInfo(forms.Form):
         email = cleaned_data.get('email')
         if not first_name or not last_name or not email:
             raise forms.ValidationError('Please enter required information')
+
+
+class UpdateSettingsForm(UserChangeForm):
+    
+    class Meta:
+        model = User
+        fields = ['email', 'first_name', 'last_name', 'username']
 
 
 
