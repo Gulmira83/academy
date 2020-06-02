@@ -2,30 +2,15 @@
 {% extends "base.html" %}
  {% block content  %}
 <link rel="stylesheet" href="/static/signup/signup.css" type="text/css">
-<div class="user">
+<div class="wrapper">
+  
+  <div class="user">
     <header class="user__header">
         <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3219/logo.svg" alt="" />
         <h1 class="user__title">Signup to academy</h1>
     </header>
     
-    {% comment %} <form class="form" method="post">
-        <div class="form__group">
-            <input type="text" placeholder="Username" id="username" class="form__input" />
-        </div>
-        
-        <div class="form__group">
-            <input type="email" placeholder="Email" id="email" class="form__input" />
-        </div>
-        
-        <div class="form__group">
-            <input type="password" placeholder="Password" id="password" class="form__input" />
-        </div>
-        
-        <div class="form__group">
-            <button class="form__input btn" type="button">Register</button>
-        </div>
-        
-    </form> {% endcomment %}
+    {% comment %} {% endcomment %}
 
   <h2>Sign up</h2>
   <form method="post">
@@ -46,6 +31,8 @@
   </form>
 
 
+
+</div>
 
 </div>
 {% comment %} <script>

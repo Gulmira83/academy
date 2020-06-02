@@ -2,8 +2,10 @@ import os
 from django.contrib.auth.models import User
 from accounting.models import Plans
 import logging
+import getpass
 
 def init_script():
+
     plans = [
         {
         'name' : 'Basic',
@@ -59,7 +61,6 @@ def init_script():
                 super_user.is_staff=True
                 super_user.save()
                 logging.warning(f"admin user <{os.environ.get('ADMIN_USER')}> has been created !!")
-
 
 def db_table_exists(table_name, cursor=None):
     ## Function to check table exist or not

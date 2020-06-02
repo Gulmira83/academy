@@ -1,11 +1,12 @@
 
 /* Full-width input fields */
-.login-modal input[type=text], input[type=password] {
+.login-modal, input[type=text], input[type=password],input[type=email] {
+  height: 40px;
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  border-radius: 4px;
+  margin: 4px 0;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px solid black;
   box-sizing: border-box;
 }
 

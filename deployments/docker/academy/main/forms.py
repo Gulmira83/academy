@@ -32,12 +32,12 @@ class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = {
+            'email',
+            'username',
             'last_name',            
             'first_name',
-            'username',
-            'email',
+            'password2',
             'password1',
-            'password2'
         }
     
     def save(self, commit=True):
