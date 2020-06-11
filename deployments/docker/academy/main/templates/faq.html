@@ -15,9 +15,8 @@
                 {{ form }}
             </p>
 
-
             {% if recaptcha %}
-            <div class="g-recaptcha" data-sitekey="6LcU_QAVAAAAAC8eRDDo0kUaRGC49pzY0VV5zM5i"></div>
+            <div class="g-recaptcha" data-sitekey="{{ public_key }}"></div>
             {% endif %}
 
             {% if message %}

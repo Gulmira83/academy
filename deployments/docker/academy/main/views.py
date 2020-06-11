@@ -175,10 +175,7 @@ def faq(request):
     recaptcha = True
     secret = getattr(settings, 'GOOGLE_RECAPTCHA_SECRET_KEY', None)
     admin_email = getattr(settings, 'EMAIL_HOST_USER', None)
-    print("..................")
-    print(secret)
-    print("setting",settings)
-    print("..................")
+    public_key = getattr(settings, 'GOOGLE_RECAPTCHA_PUBLIC_KEY', None)
 
     if request.method == 'POST': 
         if form.is_valid():
@@ -218,11 +215,11 @@ def faq(request):
                 failed_recaptcha = True
                 recaptcha = True
 
-                args = {'form':form, 'failed_recaptcha':failed_recaptcha, 'recaptcha':recaptcha}
+                args = {'form':form, 'failed_recaptcha':failed_recaptcha, 'recaptcha':recaptcha,'public_key':public_key}
                 return render(request, 'faq.html', args)
   
     
-    args = {'form':form, 'recaptcha':recaptcha}
+    args = {'form':form, 'recaptcha':recaptcha,'public_key':public_key}
 
     return render(request, 'faq.html',args)
 
