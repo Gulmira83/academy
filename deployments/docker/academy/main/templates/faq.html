@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content  %}
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+<link rel="stylesheet" href="/static/signup/signup.css" type="text/css">
+<div class="wrapper">
+  
+  <div class="user">
+    <header class="user__header">
+        <h1 class="user__title" style="color:black; margin-bottom:10px;">FAQ</h1>
+    </header>
+
+        <form method="post">
+            {% csrf_token %}
+            <p>
+                {{ form }}
+            </p>
+
+
+            {% if recaptcha %}
+            <div class="g-recaptcha" data-sitekey="6LcU_QAVAAAAAC8eRDDo0kUaRGC49pzY0VV5zM5i"></div>
+            {% endif %}
+
+            {% if message %}
+                <h3 style="margin-bottom:50px;">thank you for contacting us , you will receive a response as soon as possible by one of our stuff!<h3>
+            {% endif %}
+
+            {% if failed_recaptcha %}
+                <h3 style="margin-bottom:50px;">Invalid reCAPTCHA. Please try again.<h3>
+            {% endif %}
+                    <button type="submit" style="margin-top:30px;" class="form__input btn">Submit your Question</button>
+        </form>
+
+</div>
+</div>
+
+{% include "footer.html" %}
+{% endblock %}

@@ -1,8 +1,20 @@
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django import forms
-
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import Questions
+from django.forms import ModelForm, Textarea
+
+
+class faqForm(forms.ModelForm):
+    class Meta:
+        model = Questions
+        fields = [ 'first_name', 'last_name', 'phone_number', 'email', 'subject', 'body']
+        widgets = {
+                    'body': Textarea(attrs={'cols': 40, 'rows': 20}),
+                }
+
+
 
 class UpdateInfo(forms.Form):
     first_name = forms.CharField(min_length=2, max_length=30)
