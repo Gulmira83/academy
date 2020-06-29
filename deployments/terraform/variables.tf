@@ -40,11 +40,16 @@ variable "deployment_endpoint" {
   type = "map"
 
   default = {
-    test  = "test.academy.fuchicorp.com"
-    dev  = "dev.academy.fuchicorp.com"
-    qa   = "qa.academy.fuchicorp.com"
-    prod = "academy.fuchicorp.com"
+    test  = "test.academy"
+    dev  = "dev.academy"
+    qa   = "qa.academy"
+    prod = "academy"
+    stage = "stage.academy"
   }
+}
+
+variable "google_domain_name" {
+  default = "fuchicorp.com"
 }
 
 variable "mysql_host" {
