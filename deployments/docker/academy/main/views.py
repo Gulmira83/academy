@@ -7,10 +7,21 @@ from django.shortcuts import render, redirect
 from .forms import (UpdateInfo,
                     RegistrationForm,
                     UpdateSettingsForm,
+                    faqForm,
                     )
 from accounting.models import Plans
-from .models import Emailer, Feature
+from .models import (NewsletterEmailer,
+                     AdminEmailer,
+                     FAQEmailer,
+                     Feature,
+                     Questions,
+                     Notification)
 from django.contrib.auth import update_session_auth_hash
+import urllib
+import json
+from django.conf import  settings
+
+
 
 def index(request):
     login_form = AuthenticationForm()
@@ -149,7 +160,7 @@ def signup(request, id):
 def newsletter(request):
     if request.method == 'POST':
         email = request.POST['email']
-        emailer = Emailer()
+        emailer = NewsletterEmailer()
         emailer.send_email(email)
         welcome = "Welcome to our newsletter"
         return render(request, 'newsletter/newsletter.html',{'welcome':welcome})
@@ -157,7 +168,69 @@ def newsletter(request):
     return render(request,'newsletter/newsletter.html')
 
 
+def faq(request):
+    from django.conf import  settings
+
+    form = faqForm(request.POST)
+    recaptcha = True
+    secret = getattr(settings, 'GOOGLE_RECAPTCHA_SECRET_KEY', None)
+    admin_email = getattr(settings, 'EMAIL_HOST_USER', None)
+    public_key = getattr(settings, 'GOOGLE_RECAPTCHA_PUBLIC_KEY', None)
+
+    if request.method == 'POST': 
+        if form.is_valid():
+            
+            #recaptcha verification
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+                'secret': secret,
+                'response': recaptcha_response
+            }
+            data = urllib.parse.urlencode(values).encode()
+            req =  urllib.request.Request(url, data=data)
+            response = urllib.request.urlopen(req)
+            result = json.loads(response.read().decode())
+ 
+            if result['success']:
+
+                #sending an email to the user 
+                email = form.cleaned_data['email']     
+                emailer = FAQEmailer()
+                emailer.send_email(email)
+
+                #sending an email to the admin 
+                mailer = AdminEmailer()
+                mailer.send_email(admin_email)
 
 
+                form.save()
+                message = True
+                form = faqForm(request.POST)
+
+                return redirect('/faq-success')
+            
+            else:
+                form = faqForm(request.POST)
+                failed_recaptcha = True
+                recaptcha = True
+
+                args = {'form':form, 'failed_recaptcha':failed_recaptcha, 'recaptcha':recaptcha,'public_key':public_key}
+                return render(request, 'faq.html', args)
+  
+    
+    args = {'form':form, 'recaptcha':recaptcha,'public_key':public_key}
+
+    return render(request, 'faq.html',args)
 
 
+@login_required
+def faq_success(request):
+    return render(request,'faq_success_msg.html')
+
+
+def faq_review(request):
+    questions = Questions.objects.all().order_by('-subject')
+
+    args = {'questions':questions}
+    return render(request,'faq_reviews.html',args)

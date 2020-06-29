@@ -14,4 +14,8 @@ urlpatterns = [
     path('coming-soon', views.commin_soon, name='comming-soon'),  
     path('newsletter', views.newsletter, name='newsletter'),
     path('password/', views.change_password, name='edit-password'),
+    path('faq', views.faq, name='faq'),
+    path('faq-success', views.faq_success, name='faq_success'),
+    path('faq-review',views.faq_review,name='faq_review'),
+
 ]

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content  %}
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+<link rel="stylesheet" href="/static/signup/signup.css" type="text/css">
+<div class="wrapper">
+  
+  <div class="user">
+    <header class="user__header">
+        <h1 class="user__title" style="color:black; margin-bottom:10px;">FAQ</h1>
+    </header>
+ 
+{% for question in questions %}
+ {% if question.confirmation %}
+<center>
+<h2 style="color:blue;">Subject : {{question.subject}}</h2><br>
+<h4>Question :{{question.body}}</h4><br>
+<h4>Posted by : {{question.user}}</h4><br>
+<h4 style="color:red;">Answer from our Admin : {{question.admin_response}}</h4><br>
+<p>...................................................<p>
+</center>
+{% endif %} 
+{% endfor %}
+  </div>
+</div>
+
+{% include "footer.html" %}
+{% endblock %}

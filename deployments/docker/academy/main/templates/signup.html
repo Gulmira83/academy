@@ -10,38 +10,20 @@
         <h1 class="user__title">Signup to academy</h1>
     </header>
     
-    {% comment %} {% endcomment %}
-
   <h2>Sign up</h2>
   <form method="post">
     {% csrf_token %}
-    {% for field in form %}
       <p>
         {{ field.label_tag }}<br>
-        {{ field }}
+        {{ form }}
         {% for error in field.errors %}
           <p style="color: red" class="form__input">{{ error }}</p>
         {% endfor %}
       </p>
-    {% endfor %} 
-
-
 
     <button type="submit" class="form__input btn">Register</button>
   </form>
-
-
-
 </div>
 
 </div>
-{% comment %} <script>
-    const button = document.querySelector('.btn')
-    const form   = document.querySelector('.form')
-
-    button.addEventListener('click', function() {
-    form.classList.add('form--no') 
-    });
-</script> {% endcomment %}
-
 {% endblock %} 
